@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\produkt;
+use App\Models\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class produktcontroller extends Controller
+class reservecontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class produktcontroller extends Controller
      */
     public function index()
     {
-        $getränks=DB::table('produkt')->get();
-        return view('/essen',compact('getränks'));
+        //
     }
 
     /**
@@ -27,7 +25,8 @@ class produktcontroller extends Controller
      */
     public function create()
     {
-        //
+        return view("reserve");
+        
     }
 
     /**
@@ -38,7 +37,9 @@ class produktcontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        reserve::create($this->validate_r());
+        $msg="erfolgreich";
+        return redirect("bestätigung")->with("success",$msg);
     }
 
     /**
@@ -47,27 +48,10 @@ class produktcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($Kategorie)
-
-    {  
-         $speciales = DB::table('produkt')->where('Kategories', 'Eisspezialitäten')->get();
-        
-        return view('/special',compact('speciales'));
-    }
-    public function sehen($Kategorie)
+    public function show($id)
     {
-  if($Kategorie=='Eisbecher'){
-        $getränks = DB::table('produkt')->where('Kategories', 'Eisbecher')->get();
-    }
-        else if($Kategorie=='Kaffee & Co.'){
-      $getränks = DB::table('produkt')->where('Kategories', 'Kaffee & Co.')->get();
-    }
-      else{
-      $getränks = DB::table('produkt')->where('Kategories', 'Bubble-Waffeln')->get();
-    }
-            return view('/essen',compact('getränks'));
-        }
        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -102,4 +86,14 @@ class produktcontroller extends Controller
     {
         //
     }
+    protected function validate_r(){
+        return request()->validate([
+'id_user'=>'required',
+'Num_tisch'=>'required',
+'Date'=>'required',
+'Name_user'=>'required',
+'Uhr'=>'required'
+        ]);
+    }
 }
+

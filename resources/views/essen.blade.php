@@ -3,19 +3,19 @@
 
     <div id="trinken"><div class="trinken_m">
       <p>
-        <a href="./essen/{Eisbecher}">Eisbecher</a>
+        <a href="http://127.0.0.1:8000/essen/Eisbecher">Eisbecher</a>
       </p>
     </div>
     <div class="trinken_m">
       <p>
-        <a href="{{route(kategorie)}}">Kaffee & Co.</a>
+        <a href="http://127.0.0.1:8000/essen/Kaffee & Co.">Kaffee & Co.</a>
       </p>
     </div>
-    <div class="trinken_m">
+  <div class="trinken_m"> 
       <p>
-        <a href="./essen/{Bubble-Waffeln}">Bubble-Waffeln</a>
+        <a href="http://127.0.0.1:8000/essen/Bubble-Waffeln">Bubble-Waffeln</a>
       </p>
-    </div>
+  </div> 
   </div>
    
     <div class="items">

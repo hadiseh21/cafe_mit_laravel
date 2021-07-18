@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\produkt;
+use App\Models\kunde;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-
-class produktcontroller extends Controller
+class kundecontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class produktcontroller extends Controller
      */
     public function index()
     {
-        $getränks=DB::table('produkt')->get();
-        return view('/essen',compact('getränks'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class produktcontroller extends Controller
      */
     public function create()
     {
-        //
+        return view("kunde");
     }
 
     /**
@@ -38,7 +35,14 @@ class produktcontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $kunden=new kunde();
+        // $kunden->Name=request('Name');
+        // $kunden->Email=request('Email');
+        // $kunden->Passwort=request('Passwort');
+        // $kunden->save();
+        kunde::create($this->validate_kunde());
+        $msg="erfolgreich angemeldet wurde";
+        return redirect("login")->with("success",$msg);
     }
 
     /**
@@ -47,27 +51,10 @@ class produktcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($Kategorie)
-
-    {  
-         $speciales = DB::table('produkt')->where('Kategories', 'Eisspezialitäten')->get();
-        
-        return view('/special',compact('speciales'));
-    }
-    public function sehen($Kategorie)
+    public function show($id)
     {
-  if($Kategorie=='Eisbecher'){
-        $getränks = DB::table('produkt')->where('Kategories', 'Eisbecher')->get();
+        //
     }
-        else if($Kategorie=='Kaffee & Co.'){
-      $getränks = DB::table('produkt')->where('Kategories', 'Kaffee & Co.')->get();
-    }
-      else{
-      $getränks = DB::table('produkt')->where('Kategories', 'Bubble-Waffeln')->get();
-    }
-            return view('/essen',compact('getränks'));
-        }
-       
 
     /**
      * Show the form for editing the specified resource.
@@ -101,5 +88,12 @@ class produktcontroller extends Controller
     public function destroy($id)
     {
         //
+    }
+    protected function validate_kunde(){
+        return request()->validate([
+            'Name'=>'required',
+            'Email'=>'required',
+            'Passwort'=>'required|min:8|max:255'
+        ]);
     }
 }

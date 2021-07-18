@@ -8,13 +8,19 @@
 </head>
 <body>
   <div class="container">
-   <div class="wrapp">
-       <div id="menu_title"><img src="/img/th.jpg" ><p id="titr">Wave Cafe</p></div>
+    @if(!Auth::guest())
+    <form action="{{route('logout')}}" method="post" id="log">
+      @csrf
+      <button type="submit" style="width:45px;background-color: rgb(89, 228, 181); border: none;">logout</button></form>
+      @endauth
+      <div class="wrapp">
+       <div id="menu_title"><img src="/img/th.jpg" ><p id="titr">Wave Cafe</p>
+</div>
     <div class="menue">
         <div class="nav"><p><a href="/essen">Getränke</a></p></div>
         <div class="nav"><p><a href="/special/{Eisspezialitäten}">Special</a></p></div>
         <div class="nav"><p><a href="/reserve">Rerservieren</a></p></div>
-        <div class="nav"><p><a href="/login">Anmelden und login</a></p></div>
+        <div class="nav"><p><a href="/register">Anmelden</a><br><a href="/login">login</a></p></div>
         <div class="nav"><p><a href="/kontakt">Kontakt</a></p></div>
         <div class="nav"><p><a href="/about">Über uns</a></p></div>
     </div> 
